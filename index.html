@@ -1421,50 +1421,41 @@
         // --- 修正後的 Gemini API 邏輯 ---
 
         async function callGemini(userQuery) {
+    const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。";
+    
+    // 使用 v1 穩定版
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
-            const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。";
+    // 將系統指令合併到對話內容中
+    const payload = {
+        contents: [
+            {
+                role: "user",
+                parts: [{ text: `[系統指令] ${systemPrompt}\n\n現在請回答使用者的問題：${userQuery}` }]
+            }
+        ]
+    };
 
-            // 修正為 1.5-flash 模型與正確網址
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
 
-            const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const data = await response.json();
+        
+        if (!response.ok) {
+            console.error("API Error Detail:", data);
+            throw new Error(data.error?.message || "請求失敗");
+        }
 
-
-
-            const payload = {
-
-                contents: [{ parts: [{ text: userQuery }] }],
-
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-
-            };
-
-
-
-            try {
-
-                const response = await fetch(url, {
-
-                    method: 'POST',
-
-                    headers: { 'Content-Type': 'application/json' },
-
-                    body: JSON.stringify(payload)
-
-                });
-
-
-
-                if (!response.ok) throw new Error("API Request Failed");
-
-                const data = await response.json();
-
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在休息中，請稍後再試！";
-
-            } catch (error) {
-
-                console.error(error);
-
-                return "小管家正在休息中，請稍後再試！";
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在休息中，請稍後再試！";
+    } catch (error) {
+        console.error("Fetch Error:", error);
+        return "小管家正在休息中，請稍後再試！";
+    }
+}
 
             }
 
