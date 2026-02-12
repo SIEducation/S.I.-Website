@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新穎教育 S.I. Education | 啟發孩子的財富智慧</title>
     
-    <!-- 引入 Font Awesome 圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- 引入 Google Fonts (Noto Sans TC & Noto Serif TC) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
@@ -86,7 +84,6 @@
             position: relative;
         }
 
-        /* Logo 圖片樣式 */
         .logo-img {
             height: 70px; 
             width: auto;
@@ -94,7 +91,6 @@
             cursor: pointer;
         }
 
-        /* 電腦版選單 */
         .nav-menu {
             display: flex;
             gap: 20px;
@@ -111,7 +107,6 @@
         }
 
         .nav-menu a:hover { color: var(--brand-gold); }
-
         .nav-menu a.active { color: var(--brand-gold); font-weight: bold; }
 
         .btn-primary {
@@ -134,7 +129,6 @@
             color: var(--brand-navy) !important;
         }
 
-        /* 手機版漢堡選單按鈕 (預設隱藏) */
         .hamburger {
             display: none;
             font-size: 1.5rem;
@@ -144,14 +138,14 @@
 
         /* --- 頁面切換控制 --- */
         .page-view {
-            display: none; /* 預設隱藏所有頁面 */
-            padding-top: 80px; /* 避開導航列 */
+            display: none;
+            padding-top: 80px;
             animation: fadeIn 0.5s ease;
             flex: 1;
         }
 
         .page-view.active {
-            display: block; /* 顯示當前頁面 */
+            display: block;
         }
 
         @keyframes fadeIn {
@@ -365,7 +359,6 @@
             padding-bottom: 5px;
         }
 
-        /* 調整品牌理念內文的行距與舒適度 */
         .philosophy-text p {
             line-height: 1.9;
             margin-bottom: 25px;
@@ -422,7 +415,7 @@
             color: white;
             text-align: center;
             padding: 100px 20px;
-            margin-top: auto; /* 確保 Footer 在最底 */
+            margin-top: auto;
         }
         .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; }
         .cta-section p { max-width: 600px; margin: 0 auto 40px; opacity: 0.9; }
@@ -439,13 +432,10 @@
         /* --- RWD 手機版設定 --- */
         @media (max-width: 768px) {
             .nav-container { height: 70px; }
-            
-            /* 顯示漢堡按鈕 */
             .hamburger { display: block; }
 
-            /* 手機版選單樣式 (預設隱藏) */
             .nav-menu {
-                display: none; /* JS 控制顯示 */
+                display: none;
                 position: absolute;
                 top: 70px;
                 left: 0;
@@ -457,7 +447,7 @@
                 border-top: 1px solid #eee;
             }
 
-            .nav-menu.show { display: flex; } /* 顯示選單 */
+            .nav-menu.show { display: flex; }
 
             .nav-menu a {
                 width: 100%;
@@ -466,9 +456,7 @@
                 border-bottom: 1px solid #f5f5f5;
             }
 
-            .hero h1 { font-size: 2rem; } /* 稍微縮小主標題字體 */
-            
-            /* 修正：強制副標題不換行，並調整字體大小 */
+            .hero h1 { font-size: 2rem; }
             .hero h1 span { 
                 white-space: nowrap; 
                 font-size: 1.8rem; 
@@ -494,7 +482,6 @@
 </head>
 <body>
 
-    <!-- 導航列 -->
     <header>
         <div class="nav-container">
             <a onclick="showPage('home')" class="logo-container">
@@ -507,12 +494,10 @@
                 >
             </a>
 
-            <!-- 漢堡選單按鈕 (手機版出現) -->
             <div class="hamburger" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
 
-            <!-- 選單連結 -->
             <nav class="nav-menu" id="nav-menu">
                 <a onclick="showPage('home')" id="link-home" class="active">首頁</a>
                 <a onclick="showPage('philosophy')" id="link-philosophy">品牌理念</a>
@@ -524,16 +509,12 @@
         </div>
     </header>
 
-    <!-- 頁面容器 -->
-    
-    <!-- PAGE 1: 首頁 (Home) -->
     <main id="page-home" class="page-view active">
-        <!-- 主視覺 Hero -->
         <section class="hero">
             <div class="bg-circle circle-1"></div>
             <div class="bg-circle circle-2"></div>
             <div class="hero-content reveal">
-                <span class="badge">新穎教育-為孩子打造的財商啟蒙課程</span>
+                <span class="badge">新穎教育-為孩子打造的財商啟啟蒙課程</span>
                 <h1>種下財富智慧的新芽<br><span>兒童財商 x 猶太智慧</span></h1>
                 <p>全台首創「國台雙語」可選的兒童財務教育課程。<br>從小建立正確金錢觀，培養小小大富翁！</p>
                 <div class="hero-buttons">
@@ -543,20 +524,18 @@
             </div>
         </section>
 
-        <!-- AI Features Section -->
         <section id="ai-playground" class="ai-section">
             <div class="ai-container">
                 <div class="ai-header reveal">
                     <h2>AI 財商實驗室 <span>Gemini Powered</span></h2>
-                    <p>運用 Google 最新 Gemini AI 技術，讓理財學習變得聰明又好玩！</p>
+                    <p>運用最新 Gemini AI 技術，讓理財學習變得聰明又好玩！</p>
                 </div>
                 
                 <div class="ai-grid">
-                    <!-- Feature 1 -->
                     <div class="ai-card reveal">
                         <h3><i class="fas fa-search-dollar"></i> 想要 vs 需要 判斷器</h3>
                         <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
-                            想買東西但不知道該不該買？輸入你想買的物品，讓 AI 錢包小管家幫你分析這是「必要的支出」還是「快樂的消費」。
+                            想買東西但不知道該不該買？輸入你想買的物品，讓 AI 錢包小管家幫你分析。
                         </p>
                         <div class="ai-result" id="analysis-result">AI 錢包小管家準備好了，請在下方輸入你想買的東西...</div>
                         <div class="ai-input-group">
@@ -568,11 +547,10 @@
                         </div>
                     </div>
 
-                    <!-- Feature 2 -->
                     <div class="ai-card reveal">
                         <h3><i class="fas fa-lightbulb"></i> 猶太智慧扭蛋機</h3>
                         <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
-                            理財路上迷惘了嗎？轉動扭蛋，獲得一句來自《塔木德》或猶太文化的古老智慧建議。
+                            獲得一句來自《塔木德》或猶太文化的古老智慧建議。
                         </p>
                         <div class="ai-result" id="wisdom-result" style="border-left-color: var(--brand-gold); min-height: 150px;">點擊按鈕，獲取今日的財富智慧金句...</div>
                         <div class="ai-input-group">
@@ -586,7 +564,6 @@
             </div>
         </section>
 
-        <!-- 核心特色 Features -->
         <section id="features" class="features">
             <div class="section-header reveal">
                 <h2>為什麼選擇新穎？</h2>
@@ -596,231 +573,119 @@
                 <div class="card accounting reveal">
                     <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
                     <h3>會計專業基底</h3>
-                    <p>由台大會計背景團隊設計。跳脫單純的收支記帳，帶領孩子理解「資產」與「負債」的真實意義，建立系統性思考。</p>
+                    <p>由台大會計背景團隊設計。跳脫單純的收支記帳，理解「資產」與「負債」的意義。</p>
                 </div>
                 <div class="card jewish reveal">
                     <div class="card-icon"><i class="fas fa-star-of-david"></i></div>
                     <h3>猶太理財智慧</h3>
-                    <p>汲取《塔木德》智慧。教導孩子如何在賺錢、存錢與用錢之間取得平衡，培養對金錢負責任的態度。</p>
+                    <p>汲取《塔木德》智慧。教導賺錢、存錢與用錢之間的平衡。</p>
                 </div>
                 <div class="card local reveal">
                     <div class="card-icon"><i class="fas fa-comments"></i></div>
                     <h3>台語文化扎根</h3>
-                    <p>用母語學習生活財商，走進市場、走進生活，讓語言成為文化的載體。</p>
+                    <p>用母語學習生活財商，讓語言成為文化的載體。</p>
                 </div>
             </div>
         </section>
 
-        <!-- 關於創辦人 About -->
         <section id="about" class="about-section">
             <div class="about-container">
                 <div class="about-img reveal">
-                    <img 
-                        src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" 
-                        alt="新穎教育創辦人" 
-                        referrerpolicy="no-referrer"
-                        style="border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; height: auto;"
-                        onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Founder+Photo';"
-                    >
+                    <img src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" alt="創辦人" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Founder+Photo';">
                 </div>
                 <div class="about-text reveal">
                     <h2>放棄傳統鐵飯碗，全心投入孩童啟蒙教育</h2>
                     <div class="highlight-text">
-                        「當我發現台灣的孩子埋頭於課業，卻對花錢、消費缺乏觀念，我知道我該挺身而出。我希望用專業，為孩子種下第一顆財富智慧的種子。」
+                        「我希望用專業，為孩子種下第一顆財富智慧的種子。」
                     </div>
-                    <p>我是新穎教育的創辦人黃紹恩。作為台灣大學會計學系的準畢業生，並曾任兒童服務性社團社長，我的夢想並非進入四大事務所成為人人稱羨的會計師，我希望透過自身的力量，啟發台灣孩子的無限可能。</p>
-                    <p>新穎 (Sin-inn) 在台語代表著「新芽」，而每一位孩子，未來都將成長茁壯為一棵棵參天大樹。在灌溉的第一步，我希望結合我的專業，以簡易的金錢、消費、投資等觀念，啟蒙孩子的金錢觀，打造國家未來的大富翁。</p>
+                    <p>我是新穎教育的創辦人黃紹恩。身為台大會計系的學生，我希望結合會計邏輯與實務，啟發台灣孩子的無限可能。</p>
                     <a onclick="showPage('philosophy')" style="color: var(--brand-navy); font-weight:bold; border-bottom: 2px solid var(--brand-gold); cursor: pointer;">閱讀更多品牌故事 <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- 課程區塊 Courses -->
         <section id="courses" class="courses-section">
             <div class="section-header reveal">
                 <h2>首發課程</h2>
-                <p>針對 11-13 歲認知發展設計，做中學、玩中學。</p>
+                <p>針對 11-13 歲認知發展設計。</p>
             </div>
             <div class="course-wrapper">
                 <div class="course-item reveal">
                     <div class="course-img c1">
-                        <div>
-                            <i class="fas fa-calculator" style="font-size:3rem;"></i>
-                            <br>小小會計師
-                        </div>
+                        <div><i class="fas fa-calculator" style="font-size:3rem;"></i><br>小小會計師</div>
                     </div>
                     <div class="course-info">
                         <span class="course-tag">入門首選</span>
                         <h3>小小會計師：資產負債表初體驗</h3>
-                        <p>別再只記流水帳！透過桌遊模擬商店經營，讓孩子在遊戲中學會區分「想要」與「需要」，並繪製出人生第一張資產負債表。</p>
-                        <div class="course-features">
-                            <span><i class="fas fa-check-circle"></i> 4-6 年級適讀</span>
-                            <span><i class="fas fa-check-circle"></i> 借貸法則實作</span>
-                            <span><i class="fas fa-check-circle"></i> 3小時工作坊</span>
-                        </div>
+                        <p>透過桌遊模擬商店經營，學會繪製人生第一張資產負債表。</p>
                         <button onclick="showPage('curriculum')" class="btn-course-detail">查看課程詳情</button>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- CTA 區塊 (僅在首頁顯示) -->
+
         <section class="cta-section">
             <div class="container reveal">
                 <h2>準備好開啟孩子的財富之旅了嗎？</h2>
-                <p>名額有限，歡迎家長加入官方 Line@ 索取最新課表與試聽資訊。</p>
                 <a href="https://lin.ee/nhTYwb3" target="_blank" class="btn-white">加入 Line@ 諮詢</a>
             </div>
         </section>
     </main>
 
-    <!-- PAGE 2: 品牌理念 (Philosophy) -->
     <main id="page-philosophy" class="page-view">
         <div class="page-content-wrapper">
-            <div class="section-header">
-                <h2>品牌理念與創辦人</h2>
-                <p>啟發每一個孩子的財富潛能，種下希望的種子。</p>
-            </div>
-
+            <div class="section-header"><h2>品牌理念與創辦人</h2></div>
             <div class="philosophy-card">
-                <!-- 第一段：品牌理念 -->
                 <div class="philosophy-section">
-                    <div class="philosophy-img">
-                        <img src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" alt="新穎教育 Logo" referrerpolicy="no-referrer">
-                    </div>
+                    <div class="philosophy-img"><img src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" alt="Logo" referrerpolicy="no-referrer"></div>
                     <div class="philosophy-text">
                         <h3>品牌理念</h3>
-                        <p>新穎（Sin-inn）在台語代表「新芽」。我們深信，每一個孩子都像是一顆剛萌發的種子，蘊含著無限的生命力與可能性。</p>
-                        <p>在台灣的教育體制下，孩子們往往專注於學科知識，卻忽略了對「金錢」與「價值」的認識。新穎教育希望能填補這塊缺口，透過系統性的財商教育，結合猶太民族流傳千年的智慧，教導孩子正確的金錢觀、價值觀與責任感。</p>
-                        <p>我們不只教怎麼賺錢，更教怎麼聰明花錢、如何規劃未來。讓孩子在成長的過程中，不僅擁有知識，更擁有面對真實世界的智慧與能力。</p>
-                    </div>
-                </div>
-
-                <!-- 第二段：創辦人介紹 -->
-                <div class="philosophy-section">
-                    <div class="philosophy-img">
-                        <img src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" alt="創辦人 黃紹恩" referrerpolicy="no-referrer" style="border-radius: 8px;">
-                    </div>
-                    <div class="philosophy-text">
-                        <h3>創辦人：黃紹恩</h3>
-                        <p>我是新穎教育的創辦人黃紹恩。作為台灣大學會計學系的學生，我受過嚴謹的財務邏輯訓練，也看過許多同學因財務觀念不佳而陷入困境。</p>
-                        <p>在大學期間，我曾擔任兒童服務性社團的社長，深入接觸過許多孩子。我發現，孩子們無時無刻不在進行消費行為，卻對金錢與消費缺乏觀念。而經濟日漸發展的台灣，投資、通膨等財務名詞也逐漸走入大眾視野。這讓我萌生了一個念頭：為什麼不把艱澀的財務知識，轉化成孩子聽得懂的語言呢？</p>
-                        <p>於是，我決定放棄進入傳統會計師事務所的平穩道路，選擇了一條充滿挑戰卻更有意義的路——創辦新穎教育。我希望用我的專業，為台灣的孩子種下第一顆財富智慧的種子，讓他們在未來的人生旅途中，能夠自信地駕馭金錢，而不是被金錢所困。</p>
+                        <p>新穎（Sin-inn）代表「新芽」。我們希望透過系統性的財商教育，結合猶太智慧，填補台灣教育對價值觀認識的缺口。</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- CTA (共用) -->
-        <section class="cta-section">
-            <div class="container">
-                <h2>認同我們的理念嗎？</h2>
-                <p>歡迎加入官方 Line@，一起為孩子的財商教育努力。</p>
-                <a href="https://lin.ee/nhTYwb3" target="_blank" class="btn-white">加入 Line@ 諮詢</a>
-            </div>
-        </section>
     </main>
 
-    <!-- PAGE 3: 課程內容 (Curriculum) -->
     <main id="page-curriculum" class="page-view">
         <div class="page-content-wrapper">
-            <div class="section-header">
-                <h2>課程內容</h2>
-                <p>我們精心設計的財商課程，適合不同年齡層的孩子。</p>
-            </div>
-            
-            <!-- 預留的空白區塊，未來填入詳細內容 -->
+            <div class="section-header"><h2>課程內容</h2></div>
             <div style="text-align: center; padding: 100px 20px; background: white; border-radius: 16px; border: 2px dashed #ddd; color: #888;">
                 <i class="fas fa-hammer" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
                 <h3>課程詳細內容即將上線</h3>
-                <p>我們正在為孩子準備最豐富有趣的課程教材，敬請期待！</p>
             </div>
         </div>
-
-        <!-- CTA (共用) -->
-        <section class="cta-section">
-            <div class="container">
-                <h2>想第一時間獲得開課通知？</h2>
-                <p>加入官方 Line@，掌握最新課程資訊。</p>
-                <a href="https://lin.ee/nhTYwb3" target="_blank" class="btn-white">加入 Line@ 諮詢</a>
-            </div>
-        </section>
     </main>
 
-    <!-- PAGE 4: 聯絡我們 (Contact) -->
     <main id="page-contact" class="page-view">
         <div class="contact-content">
-            <div class="section-header">
-                <h2>聯絡我們</h2>
-                <p>有任何課程疑問或商業合作需求，歡迎與我們聯繫。</p>
-            </div>
-            
             <div class="contact-card">
-                <!-- 聯絡頁面 Logo -->
-                <img 
-                    src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" 
-                    alt="新穎教育 Logo" 
-                    class="contact-logo"
-                    referrerpolicy="no-referrer"
-                    style="margin: 0 auto 30px auto;"
-                >
-                
-                <div class="contact-info-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <span class="contact-label">電子郵件（商業合作）：</span>
-                        <br>
-                        <a href="mailto:si.kid.education@gmail.com">si.kid.education@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="contact-info-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <div>
-                        <span class="contact-label">電話號碼：</span>
-                        <span>（暫未提供）</span>
-                    </div>
-                </div>
-
-                <div class="contact-info-item">
-                    <i class="fab fa-line"></i>
-                    <div>
-                        <span class="contact-label">官方 Line@：</span>
-                        <a href="https://lin.ee/nhTYwb3" target="_blank" style="color:var(--brand-green); font-weight:bold;">點擊加入好友</a>
-                    </div>
-                </div>
+                <img src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" alt="Logo" class="contact-logo" referrerpolicy="no-referrer">
+                <div class="contact-info-item"><i class="fas fa-envelope"></i><div>si.kid.education@gmail.com</div></div>
+                <div class="contact-info-item"><i class="fab fa-line"></i><a href="https://lin.ee/nhTYwb3" target="_blank">點擊加入 Line@</a></div>
             </div>
         </div>
     </main>
 
-    <!-- Footer (共用) -->
-    <footer id="contact">
+    <footer>
         <div class="footer-logo-text">新穎教育 S.I. Education</div>
-        
-        <p>兒童財商啟蒙教育第一品牌</p>
         <div class="social-links">
             <a href="https://www.facebook.com/share/1CL6MFXfQq/" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/s.i.education?igsh=MTlwdWw5eDBxbG9nYw==" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://lin.ee/nhTYwb3" target="_blank"><i class="fab fa-line"></i></a>
+            <a href="https://www.instagram.com/s.i.education" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <p>© 2026 S.I. Education. All Rights Reserved.</p>
     </footer>
 
-    <!-- Gemini API Script -->
     <script>
-        // 固定金鑰與配置
         const apiKey = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
         
-        // --- 頁面切換邏輯 ---
         function showPage(pageId, sectionId = null) {
             document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
-
             document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
-            if (pageId === 'home' && !sectionId) document.getElementById('link-home').classList.add('active');
-            else if (pageId === 'philosophy') document.getElementById('link-philosophy').classList.add('active');
-            else if (pageId === 'curriculum') document.getElementById('link-curriculum').classList.add('active');
-            else if (pageId === 'contact') document.getElementById('link-contact').classList.add('active');
+            
+            const activeLink = document.getElementById('link-' + (sectionId ? 'ai' : pageId));
+            if(activeLink) activeLink.classList.add('active');
 
             if (sectionId) {
                 setTimeout(() => {
@@ -830,68 +695,43 @@
             } else {
                 window.scrollTo(0, 0);
             }
-
-            const menu = document.getElementById('nav-menu');
-            if (menu.classList.contains('show')) toggleMenu();
-            if (pageId === 'home') initReveal(); 
+            if (document.getElementById('nav-menu').classList.contains('show')) toggleMenu();
+            initReveal();
         }
 
-        function toggleMenu() {
-            document.getElementById('nav-menu').classList.toggle('show');
-        }
+        function toggleMenu() { document.getElementById('nav-menu').classList.toggle('show'); }
 
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
 
-        function initReveal() {
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-        }
-
+        function initReveal() { document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el)); }
         document.addEventListener('DOMContentLoaded', initReveal);
 
-        // --- Gemini API Logic (Standard & Fixed) ---
+        // --- 修正後的 Gemini API 邏輯 ---
         async function callGemini(userQuery) {
             const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。";
-            
-            // 指數退避重試邏輯
-            const fetchWithRetry = async (url, options, retries = 5, backoff = 1000) => {
-                try {
-                    const response = await fetch(url, options);
-                    if (!response.ok) {
-                        if (retries > 0 && (response.status === 429 || response.status >= 500)) {
-                            await new Promise(resolve => setTimeout(resolve, backoff));
-                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                        }
-                        throw new Error("連線失敗");
-                    }
-                    return await response.json();
-                } catch (err) {
-                    if (retries > 0) {
-                        await new Promise(resolve => setTimeout(resolve, backoff));
-                        return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                    }
-                    throw err;
-                }
+            // 修正為 1.5-flash 模型與正確網址
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
             };
 
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                const payload = {
-                    contents: [{ parts: [{ text: userQuery }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] }
-                };
-
-                const result = await fetchWithRetry(url, {
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
-                return result.candidates?.[0]?.content?.parts?.[0]?.text || "抱歉，AI 錢包小管家現在有點忙碌！";
+                if (!response.ok) throw new Error("API Request Failed");
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在休息中，請稍後再試！";
             } catch (error) {
                 console.error(error);
-                return "抱歉，AI 錢包小管家現在有點忙碌！";
+                return "連線失敗，請檢查網路或 API Key！";
             }
         }
 
@@ -899,38 +739,22 @@
             const input = document.getElementById('item-input').value.trim();
             const resultBox = document.getElementById('analysis-result');
             const btn = document.querySelector('button[onclick="analyzeWantVsNeed()"]');
-            
             if (!input) { resultBox.innerText = "請先輸入你想買的東西喔！"; return; }
 
-            btn.querySelector('.btn-text').style.display = 'none';
-            btn.querySelector('.loading-spinner').style.display = 'block';
             btn.disabled = true;
-            resultBox.innerText = "正在分析這筆消費...";
-
-            const query = `我想買：「${input}」。請幫我分析這是「想要」(Want) 還是「需要」(Need)，解釋原因並給我溫暖的建議。`;
-            const response = await callGemini(query);
-            
+            resultBox.innerText = "正在分析中...";
+            const response = await callGemini(`我想買：「${input}」。請分析這是「想要」還是「需要」，並給 10 歲小孩溫暖建議。`);
             resultBox.innerText = response;
-            btn.querySelector('.btn-text').style.display = 'block';
-            btn.querySelector('.loading-spinner').style.display = 'none';
             btn.disabled = false;
         }
 
         async function getJewishWisdom() {
             const resultBox = document.getElementById('wisdom-result');
             const btn = document.querySelector('button[onclick="getJewishWisdom()"]');
-            
-            btn.querySelector('.btn-text').style.display = 'none';
-            btn.querySelector('.loading-spinner').style.display = 'block';
             btn.disabled = true;
             resultBox.innerText = "正在轉動智慧扭蛋...";
-
-            const query = "請給我一句來自《塔木德》(Talmud) 或猶太文化的簡短理財智慧金句，解釋意思並告訴我如何用在現代的存錢習慣。";
-            const response = await callGemini(query);
-
+            const response = await callGemini("請給我一句來自《塔木德》或猶太文化的財富智慧金句，解釋給孩子聽並給一個存錢小建議。");
             resultBox.innerText = response;
-            btn.querySelector('.btn-text').style.display = 'block';
-            btn.querySelector('.loading-spinner').style.display = 'none';
             btn.disabled = false;
         }
     </script>
