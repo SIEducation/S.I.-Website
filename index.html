@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新穎教育 S.I. Education | 啟發孩子的財富智慧</title>
-    <!-- 引入 Font Awesome 圖標庫 -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+
     <style>
         /* --- 變數設定 (Design Tokens) --- */
         :root {
-            --brand-navy: #1B325F;         /* Logo 深藍：專業、穩重 */
-            --brand-gold: #C6A665;         /* Logo 金色：智慧、價值 */
-            --brand-green: #6B8E23;        /* 葉子綠：點綴用 */
+            --brand-navy: #1B325F;          /* Logo 深藍：專業、穩重 */
+            --brand-gold: #C6A665;          /* Logo 金色：智慧、價值 */
+            --brand-green: #6B8E23;         /* 葉子綠：點綴用 */
             
             --primary-btn: var(--brand-gold);
             --bg-light: #F9FAFC;
@@ -27,7 +32,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
             background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.7;
@@ -38,13 +43,25 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+            font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
             font-weight: 700;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
         img { max-width: 100%; display: block; }
+
+        /* --- 滑動顯示動畫 (Scroll Reveal) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         /* --- 導航列 --- */
         header {
@@ -86,7 +103,7 @@
             font-weight: 500;
             color: var(--brand-navy);
             position: relative;
-            font-family: "PingFang TC", sans-serif;
+            font-family: "Noto Sans TC", sans-serif;
             cursor: pointer;
             font-size: 0.95rem;
         }
@@ -233,9 +250,9 @@
         .ai-card h3 { color: var(--ai-purple); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .ai-card p { text-align: left; }
         .ai-input-group { margin-top: auto; display: flex; flex-direction: column; gap: 15px; }
-        .ai-input { width: 100%; padding: 15px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 1rem; text-align: left; }
+        .ai-input { width: 100%; padding: 15px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 1rem; text-align: left; font-family: "Noto Sans TC", sans-serif; }
         .ai-input:focus { outline: none; border-color: var(--ai-purple); }
-        .btn-ai { background: linear-gradient(45deg, var(--ai-purple), #9575CD); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: transform 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn-ai { background: linear-gradient(45deg, var(--ai-purple), #9575CD); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: transform 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; font-family: "Noto Sans TC", sans-serif; }
         .btn-ai:hover { transform: scale(1.02); }
         .ai-result { margin-top: 20px; padding: 20px; background-color: #F8F9FA; border-radius: 8px; min-height: 100px; font-size: 0.95rem; color: var(--text-main); border-left: 4px solid var(--ai-purple); line-height: 1.8; white-space: pre-wrap; text-align: left; }
         .loading-spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s infinite; }
@@ -261,7 +278,7 @@
         .about-text { flex: 1; min-width: 300px; }
         .about-text h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--brand-navy); }
         .about-text p { margin-bottom: 20px; color: var(--text-light); text-align: justify; }
-        .highlight-text { border-left: 4px solid var(--brand-gold); padding-left: 15px; font-style: italic; color: var(--brand-navy); margin: 25px 0; font-family: "Songti TC", serif; font-size: 1.1rem; }
+        .highlight-text { border-left: 4px solid var(--brand-gold); padding-left: 15px; font-style: italic; color: var(--brand-navy); margin: 25px 0; font-family: "Noto Serif TC", serif; font-size: 1.1rem; }
 
         .course-wrapper { max-width: 1000px; margin: 0 auto; }
         .course-item { background: white; border-radius: var(--radius); overflow: hidden; display: flex; margin-bottom: 30px; box-shadow: var(--shadow); transition: transform 0.3s; }
@@ -286,6 +303,7 @@
             font-weight: bold;
             transition: all 0.3s;
             cursor: pointer;
+            font-family: "Noto Sans TC", sans-serif;
         }
         .btn-course-detail:hover {
             background-color: var(--brand-navy);
@@ -399,12 +417,12 @@
         }
         .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; }
         .cta-section p { max-width: 600px; margin: 0 auto 40px; opacity: 0.9; }
-        .btn-white { background-color: var(--brand-gold); color: var(--brand-navy); padding: 12px 35px; border-radius: 4px; font-weight: bold; font-size: 1.1rem; }
+        .btn-white { background-color: var(--brand-gold); color: var(--brand-navy); padding: 12px 35px; border-radius: 4px; font-weight: bold; font-size: 1.1rem; font-family: "Noto Sans TC", sans-serif; }
         .btn-white:hover { background-color: #D4B775; color: white; }
 
         /* --- Footer --- */
         footer { background-color: #111e3b; color: #aaa; padding: 60px 20px; text-align: center; }
-        .footer-logo-text { color: white; font-family: "Songti TC", serif; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; }
+        .footer-logo-text { color: white; font-family: "Noto Serif TC", serif; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; }
         .social-links { margin: 20px 0; }
         .social-links a { color: white; margin: 0 10px; font-size: 1.5rem; transition: 0.3s; }
         .social-links a:hover { color: var(--brand-gold); }
@@ -458,7 +476,6 @@
 </head>
 <body>
 
-    <!-- 導航列 -->
     <header>
         <div class="nav-container">
             <a onclick="showPage('home')" class="logo-container">
@@ -471,12 +488,10 @@
                 >
             </a>
 
-            <!-- 漢堡選單按鈕 (手機版出現) -->
             <div class="hamburger" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
 
-            <!-- 選單連結 -->
             <nav class="nav-menu" id="nav-menu">
                 <a onclick="showPage('home')" id="link-home" class="active">首頁</a>
                 <a onclick="showPage('philosophy')" id="link-philosophy">品牌理念</a>
@@ -488,15 +503,11 @@
         </div>
     </header>
 
-    <!-- 頁面容器 -->
-    
-    <!-- PAGE 1: 首頁 (Home) -->
     <main id="page-home" class="page-view active">
-        <!-- 主視覺 Hero -->
         <section class="hero">
             <div class="bg-circle circle-1"></div>
             <div class="bg-circle circle-2"></div>
-            <div class="hero-content">
+            <div class="hero-content reveal">
                 <span class="badge">新穎教育-為孩子打造的財商啟蒙課程</span>
                 <h1>種下財富智慧的新芽<br><span>兒童財商 x 猶太智慧</span></h1>
                 <p>全台首創「國台雙語」可選的兒童財務教育課程。<br>從小建立正確金錢觀，培養小小大富翁！</p>
@@ -507,17 +518,15 @@
             </div>
         </section>
 
-        <!-- AI Features Section -->
         <section id="ai-playground" class="ai-section">
             <div class="ai-container">
-                <div class="ai-header">
+                <div class="ai-header reveal">
                     <h2>AI 財商實驗室 <span>Gemini Powered</span></h2>
                     <p>運用 Google 最新 Gemini AI 技術，讓理財學習變得聰明又好玩！</p>
                 </div>
                 
                 <div class="ai-grid">
-                    <!-- Feature 1 -->
-                    <div class="ai-card">
+                    <div class="ai-card reveal">
                         <h3><i class="fas fa-search-dollar"></i> 想要 vs 需要 判斷器</h3>
                         <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
                             想買東西但不知道該不該買？輸入你想買的物品，讓 AI 錢包小管家幫你分析這是「必要的支出」還是「快樂的消費」。
@@ -532,8 +541,7 @@
                         </div>
                     </div>
 
-                    <!-- Feature 2 -->
-                    <div class="ai-card">
+                    <div class="ai-card reveal">
                         <h3><i class="fas fa-lightbulb"></i> 猶太智慧扭蛋機</h3>
                         <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
                             理財路上迷惘了嗎？轉動扭蛋，獲得一句來自《塔木德》或猶太文化的古老智慧建議。
@@ -550,24 +558,23 @@
             </div>
         </section>
 
-        <!-- 核心特色 Features -->
         <section id="features" class="features">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>為什麼選擇新穎？</h2>
                 <p>我們不教孩子投機，我們教孩子看見金錢背後的價值運作。</p>
             </div>
             <div class="cards-grid">
-                <div class="card accounting">
+                <div class="card accounting reveal">
                     <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
                     <h3>會計專業基底</h3>
                     <p>由台大會計背景團隊設計。跳脫單純的收支記帳，帶領孩子理解「資產」與「負債」的真實意義，建立系統性思考。</p>
                 </div>
-                <div class="card jewish">
+                <div class="card jewish reveal">
                     <div class="card-icon"><i class="fas fa-star-of-david"></i></div>
                     <h3>猶太理財智慧</h3>
                     <p>汲取《塔木德》智慧。教導孩子如何在賺錢、存錢與用錢之間取得平衡，培養對金錢負責任的態度。</p>
                 </div>
-                <div class="card local">
+                <div class="card local reveal">
                     <div class="card-icon"><i class="fas fa-comments"></i></div>
                     <h3>台語文化扎根</h3>
                     <p>用母語學習生活財商，走進市場、走進生活，讓語言成為文化的載體。</p>
@@ -575,10 +582,9 @@
             </div>
         </section>
 
-        <!-- 關於創辦人 About -->
         <section id="about" class="about-section">
             <div class="about-container">
-                <div class="about-img">
+                <div class="about-img reveal">
                     <img 
                         src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" 
                         alt="新穎教育創辦人" 
@@ -587,7 +593,7 @@
                         onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Founder+Photo';"
                     >
                 </div>
-                <div class="about-text">
+                <div class="about-text reveal">
                     <h2>放棄傳統鐵飯碗，全心投入孩童啟蒙教育</h2>
                     <div class="highlight-text">
                         「當我發現台灣的孩子埋頭於課業，卻對花錢、消費缺乏觀念，我知道我該挺身而出。我希望用專業，為孩子種下第一顆財富智慧的種子。」
@@ -599,14 +605,13 @@
             </div>
         </section>
 
-        <!-- 課程區塊 Courses -->
         <section id="courses" class="courses-section">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>首發課程</h2>
                 <p>針對 11-13 歲認知發展設計，做中學、玩中學。</p>
             </div>
             <div class="course-wrapper">
-                <div class="course-item">
+                <div class="course-item reveal">
                     <div class="course-img c1">
                         <div>
                             <i class="fas fa-calculator" style="font-size:3rem;"></i>
@@ -628,9 +633,8 @@
             </div>
         </section>
         
-        <!-- CTA 區塊 (僅在首頁顯示) -->
         <section class="cta-section">
-            <div class="container">
+            <div class="container reveal">
                 <h2>準備好開啟孩子的財富之旅了嗎？</h2>
                 <p>名額有限，歡迎家長加入官方 Line@ 索取最新課表與試聽資訊。</p>
                 <a href="https://lin.ee/nhTYwb3" target="_blank" class="btn-white">加入 Line@ 諮詢</a>
@@ -638,7 +642,6 @@
         </section>
     </main>
 
-    <!-- PAGE 2: 品牌理念 (Philosophy) -->
     <main id="page-philosophy" class="page-view">
         <div class="page-content-wrapper">
             <div class="section-header">
@@ -647,7 +650,6 @@
             </div>
 
             <div class="philosophy-card">
-                <!-- 第一段：品牌理念 -->
                 <div class="philosophy-section">
                     <div class="philosophy-img">
                         <img src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" alt="新穎教育 Logo" referrerpolicy="no-referrer">
@@ -660,7 +662,6 @@
                     </div>
                 </div>
 
-                <!-- 第二段：創辦人介紹 -->
                 <div class="philosophy-section">
                     <div class="philosophy-img">
                         <img src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" alt="創辦人 黃紹恩" referrerpolicy="no-referrer" style="border-radius: 8px;">
@@ -675,7 +676,6 @@
             </div>
         </div>
         
-        <!-- CTA (共用) -->
         <section class="cta-section">
             <div class="container">
                 <h2>認同我們的理念嗎？</h2>
@@ -685,7 +685,6 @@
         </section>
     </main>
 
-    <!-- PAGE 3: 課程內容 (Curriculum) -->
     <main id="page-curriculum" class="page-view">
         <div class="page-content-wrapper">
             <div class="section-header">
@@ -693,7 +692,6 @@
                 <p>我們精心設計的財商課程，適合不同年齡層的孩子。</p>
             </div>
             
-            <!-- 預留的空白區塊，未來填入詳細內容 -->
             <div style="text-align: center; padding: 100px 20px; background: white; border-radius: 16px; border: 2px dashed #ddd; color: #888;">
                 <i class="fas fa-hammer" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
                 <h3>課程詳細內容即將上線</h3>
@@ -701,7 +699,6 @@
             </div>
         </div>
 
-        <!-- CTA (共用) -->
         <section class="cta-section">
             <div class="container">
                 <h2>想第一時間獲得開課通知？</h2>
@@ -711,7 +708,6 @@
         </section>
     </main>
 
-    <!-- PAGE 4: 聯絡我們 (Contact) -->
     <main id="page-contact" class="page-view">
         <div class="contact-content">
             <div class="section-header">
@@ -720,7 +716,6 @@
             </div>
             
             <div class="contact-card">
-                <!-- 聯絡頁面 Logo -->
                 <img 
                     src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" 
                     alt="新穎教育 Logo" 
@@ -757,7 +752,6 @@
         </div>
     </main>
 
-    <!-- Footer (共用) -->
     <footer id="contact">
         <div class="footer-logo-text">新穎教育 S.I. Education</div>
         
@@ -767,10 +761,9 @@
             <a href="https://www.instagram.com/s.i.education?igsh=MTlwdWw5eDBxbG9nYw==" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="https://lin.ee/nhTYwb3" target="_blank"><i class="fab fa-line"></i></a>
         </div>
-        <p>&copy; 2026 S.I. Education. All Rights Reserved.</p>
+        <p>© 2026 S.I. Education. All Rights Reserved.</p>
     </footer>
 
-    <!-- Gemini API Script -->
     <script>
         const SITE_OWNER_API_KEY = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
         const effectiveKey = (typeof apiKey !== 'undefined' && apiKey) ? apiKey : SITE_OWNER_API_KEY;
@@ -815,6 +808,11 @@
             if (menu.classList.contains('show')) {
                 toggleMenu();
             }
+
+            // 5. 重新觸發首頁動畫 (如果是切回首頁)
+            if (pageId === 'home') {
+                initReveal(); 
+            }
         }
 
         // --- 手機版選單切換 ---
@@ -822,6 +820,26 @@
             const menu = document.getElementById('nav-menu');
             menu.classList.toggle('show');
         }
+
+        // --- Scroll Reveal Animation Logic ---
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1 // 元素出現 10% 時觸發
+        });
+
+        function initReveal() {
+            const elements = document.querySelectorAll('.reveal');
+            elements.forEach(el => revealObserver.observe(el));
+        }
+
+        // 頁面載入時初始化動畫偵測
+        document.addEventListener('DOMContentLoaded', initReveal);
+
 
         // --- AI API Logic (不變) ---
         async function callGemini(prompt) {
