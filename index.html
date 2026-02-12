@@ -677,7 +677,7 @@
     </footer>
 
     <script>
-        const apiKey = "AIzaSyCHjVbXgZBOg5AWoT-yWEp8UjrMQs7gdzg"; 
+        const apiKey = "AIzaSyDJG09wGtjRHZ2jJyqUfXd1Qw1Dkgl4V8I"; 
         
         function showPage(pageId, sectionId = null) {
             document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
@@ -731,7 +731,7 @@
                 return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在休息中，請稍後再試！";
             } catch (error) {
                 console.error(error);
-                return "連線失敗，請檢查網路或 API Key！";
+                return "小管家正在休息中，請稍後再試！";
             }
         }
 
