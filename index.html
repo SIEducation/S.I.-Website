@@ -4,249 +4,455 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新穎教育 S.I. Education | 啟發孩子的財富智慧</title>
-    
-    <!-- 引入 Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- 引入 Font Awesome -->
+    <!-- 引入 Font Awesome 圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         /* --- 變數設定 (Design Tokens) --- */
         :root {
-            --brand-navy: #0F2545;
-            --brand-gold: #C6A665;
-            --brand-green: #558B2F;
-            --bg-body: #FDFDFD;
-            --bg-light: #F4F7F6;
+            --brand-navy: #1B325F;         /* Logo 深藍：專業、穩重 */
+            --brand-gold: #C6A665;         /* Logo 金色：智慧、價值 */
+            --brand-green: #6B8E23;        /* 葉子綠：點綴用 */
+            
+            --primary-btn: var(--brand-gold);
+            --bg-light: #F9FAFC;
             --text-main: #2C3E50;
-            --text-light: #64748B;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 30px -5px rgba(15, 37, 69, 0.08);
-            --radius-md: 16px;
-            --ai-purple: #7C4DFF;
+            --text-light: #546E7A;
+            --white: #FFFFFF;
+            --shadow: 0 4px 12px rgba(27, 50, 95, 0.08);
+            --radius: 8px;
+            --ai-purple: #673AB7;
         }
 
         /* --- 全局重置 --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        
+
         body {
-            font-family: "Noto Sans TC", sans-serif;
-            background-color: var(--bg-body);
+            font-family: "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+            background-color: var(--bg-light);
             color: var(--text-main);
-            line-height: 1.8;
+            line-height: 1.7;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4 {
-            font-family: "Noto Serif TC", serif;
+            font-family: "Songti TC", "Noto Serif TC", "PMingLiU", serif;
             font-weight: 700;
-            color: var(--brand-navy);
-            letter-spacing: 0.02em;
         }
 
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
         img { max-width: 100%; display: block; }
-        
-        /* 卷動浮現動畫 */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- 電腦版樣式 (維持原樣) --- */
+        /* --- 導航列 --- */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.03);
-            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
+
         .nav-container {
-            max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 80px;
-            display: flex; justify-content: space-between; align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
         }
-        .logo-img { height: 70px; width: auto; object-fit: contain; cursor: pointer; }
-        .nav-menu { display: flex; gap: 32px; align-items: center; }
-        .nav-menu a { font-weight: 500; color: var(--brand-navy); position: relative; cursor: pointer; }
+
+        /* Logo 圖片樣式 */
+        .logo-img {
+            height: 70px; 
+            width: auto;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        /* 電腦版選單 */
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            color: var(--brand-navy);
+            position: relative;
+            font-family: "PingFang TC", sans-serif;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
         .nav-menu a:hover { color: var(--brand-gold); }
+
+        .nav-menu a.active { color: var(--brand-gold); font-weight: bold; }
+
         .btn-primary {
-            background: linear-gradient(135deg, var(--brand-navy), #243B55);
-            color: white !important; padding: 10px 24px; border-radius: 50px;
-            font-weight: 600; cursor: pointer; letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--brand-navy), #2A4D85);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(27, 50, 95, 0.2);
+            border: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
         }
-        .hamburger { display: none; font-size: 1.5rem; color: var(--brand-navy); cursor: pointer; }
-        
-        .page-view { display: none; padding-top: 80px; animation: fadeIn 0.6s ease; flex: 1; }
-        .page-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Hero */
-        .hero { padding: 120px 24px 100px; background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%); position: relative; overflow: hidden; }
-        .hero-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 60px; position: relative; z-index: 1; }
-        .hero-text { flex: 1; text-align: left; }
-        .hero-visual { flex: 1; display: flex; justify-content: center; }
-        .hero-visual img { border-radius: var(--radius-md); box-shadow: var(--shadow-md); max-width: 100%; }
-        .badge { display: inline-block; background-color: rgba(15, 37, 69, 0.05); color: var(--brand-navy); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; margin-bottom: 24px; font-weight: 600; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 24px; line-height: 1.2; }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(27, 50, 95, 0.3);
+            background: var(--brand-gold);
+            color: var(--brand-navy) !important;
+        }
+
+        /* 手機版漢堡選單按鈕 (預設隱藏) */
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--brand-navy);
+            cursor: pointer;
+        }
+
+        /* --- 頁面切換控制 --- */
+        .page-view {
+            display: none; /* 預設隱藏所有頁面 */
+            padding-top: 80px; /* 避開導航列 */
+            animation: fadeIn 0.5s ease;
+            flex: 1;
+        }
+
+        .page-view.active {
+            display: block; /* 顯示當前頁面 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 100px 20px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F2F4F8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        .circle-1 { width: 400px; height: 400px; background: var(--brand-navy); top: -100px; left: -100px; }
+        .circle-2 { width: 300px; height: 300px; background: var(--brand-gold); bottom: 50px; right: -50px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(198, 166, 101, 0.15);
+            color: var(--brand-navy);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: 1px solid rgba(198, 166, 101, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--brand-navy);
+            line-height: 1.3;
+        }
+
         .hero h1 span { color: var(--brand-gold); }
-        .hero p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px; max-width: 500px; }
-        .hero-buttons { display: flex; gap: 16px; }
-        .btn-outline { border: 2px solid var(--brand-navy); color: var(--brand-navy); padding: 10px 28px; border-radius: 50px; font-weight: 600; background: transparent; cursor: pointer; }
 
-        /* General Sections */
-        .features, .courses-section, .ai-section, .about-section, .cta-section { padding: 100px 24px; }
-        .ai-section { background: #FDFDFD; }
-        .features { background-color: var(--bg-light); }
-        .courses-section { background: var(--bg-light); }
-        .about-section { background: white; }
-        .cta-section { background-color: var(--brand-navy); color: white; text-align: center; }
-        
-        .ai-container, .cards-grid, .about-container, .course-wrapper, .page-content-wrapper, .contact-content {
-            max-width: 1100px; margin: 0 auto;
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 45px;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--brand-navy);
+            color: var(--brand-navy);
+            padding: 10px 28px;
+            border-radius: 4px;
+            font-weight: bold;
+            background: transparent;
+            cursor: pointer;
         }
         
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-header h2 { font-size: 2.8rem; margin-bottom: 16px; }
-        
-        /* Cards */
+        .btn-outline:hover {
+            background-color: var(--brand-navy);
+            color: white;
+        }
+
+        /* --- AI Section --- */
+        .ai-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #F3E5F5 0%, #FFFFFF 100%);
+        }
+        .ai-container { max-width: 1000px; margin: 0 auto; }
+        .ai-header { text-align: center; margin-bottom: 50px; }
+        .ai-header h2 { font-size: 2.5rem; color: var(--ai-purple); margin-bottom: 15px; }
         .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .ai-card {
+            background: white; border-radius: 12px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(103, 58, 183, 0.08);
+            border: 1px solid rgba(103, 58, 183, 0.1);
+            display: flex; flex-direction: column;
+        }
+        .ai-card h3 { color: var(--ai-purple); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .ai-card p { text-align: left; }
+        .ai-input-group { margin-top: auto; display: flex; flex-direction: column; gap: 15px; }
+        .ai-input { width: 100%; padding: 15px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 1rem; text-align: left; }
+        .ai-input:focus { outline: none; border-color: var(--ai-purple); }
+        .btn-ai { background: linear-gradient(45deg, var(--ai-purple), #9575CD); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: transform 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn-ai:hover { transform: scale(1.02); }
+        .ai-result { margin-top: 20px; padding: 20px; background-color: #F8F9FA; border-radius: 8px; min-height: 100px; font-size: 0.95rem; color: var(--text-main); border-left: 4px solid var(--ai-purple); line-height: 1.8; white-space: pre-wrap; text-align: left; }
+        .loading-spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* --- Feature & About & Courses --- */
+        .features, .courses-section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--brand-navy); margin-bottom: 15px; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 40px 30px; border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s; border-top: 4px solid transparent; text-align: center; }
+        .card:hover { transform: translateY(-10px); }
+        .card-icon { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; }
+        .card.accounting { border-color: var(--brand-navy); } .card.accounting .card-icon { background-color: #E8EAF6; color: var(--brand-navy); }
+        .card.jewish { border-color: var(--brand-gold); } .card.jewish .card-icon { background-color: #FFF8E1; color: var(--brand-gold); }
+        .card.local { border-color: var(--brand-green); } .card.local .card-icon { background-color: #F1F8E9; color: var(--brand-green); }
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; color: var(--brand-navy); }
+        .card p { color: var(--text-light); font-size: 0.95rem; }
+
+        .about-section { background-color: var(--white); padding: 100px 20px; }
+        .about-container { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+        .about-img { flex: 1; min-width: 300px; }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-text h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--brand-navy); }
+        .about-text p { margin-bottom: 20px; color: var(--text-light); text-align: justify; }
+        .highlight-text { border-left: 4px solid var(--brand-gold); padding-left: 15px; font-style: italic; color: var(--brand-navy); margin: 25px 0; font-family: "Songti TC", serif; font-size: 1.1rem; }
+
+        .course-wrapper { max-width: 1000px; margin: 0 auto; }
+        .course-item { background: white; border-radius: var(--radius); overflow: hidden; display: flex; margin-bottom: 30px; box-shadow: var(--shadow); transition: transform 0.3s; }
+        .course-item:hover { transform: scale(1.01); }
+        .course-img { width: 300px; background-color: #ddd; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; }
+        .course-img.c1 { background: linear-gradient(135deg, var(--brand-navy), #3F51B5); }
+        .course-info { padding: 35px; flex: 1; }
+        .course-tag { font-size: 0.8rem; background-color: #E8EAF6; color: var(--brand-navy); padding: 4px 12px; border-radius: 4px; margin-bottom: 12px; display: inline-block; font-weight: bold; }
+        .course-info h3 { margin-bottom: 10px; font-size: 1.6rem; color: var(--brand-navy); }
+        .course-info p { color: var(--text-light); margin-bottom: 20px; }
+        .course-features { display: flex; gap: 15px; font-size: 0.9rem; color: var(--text-main); }
+        .course-features span i { color: var(--brand-gold); margin-right: 5px; }
         
-        .ai-card, .card { background: white; border-radius: var(--radius-md); padding: 40px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: 0.3s; }
-        .card { text-align: center; border-top: 4px solid transparent; }
-        .card.accounting { border-color: var(--brand-navy); } 
-        .card.jewish { border-color: var(--brand-gold); } 
-        .card.local { border-color: var(--brand-green); }
+        .btn-course-detail {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--brand-navy);
+            border: 1px solid var(--brand-navy);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-course-detail:hover {
+            background-color: var(--brand-navy);
+            color: white;
+        }
+
+        /* --- New Pages: Philosophy & Curriculum --- */
+        .page-content-wrapper {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 40px 20px;
+        }
         
-        .card-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 2rem; background: #f5f5f5; }
+        .philosophy-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
         
-        /* AI Inputs */
-        .ai-input { width: 100%; padding: 16px; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 1rem; background: #FAFAFA; margin-bottom: 16px; }
-        .btn-ai { background: linear-gradient(135deg, var(--ai-purple), #651FFF); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%; }
-        .ai-result { margin-top: 24px; padding: 24px; background-color: #F8FAFC; border-radius: 12px; border-left: 4px solid var(--ai-purple); text-align: left; }
+        .philosophy-section {
+            display: flex;
+            align-items: center;
+            padding: 50px;
+            gap: 50px;
+        }
+        
+        .philosophy-section:nth-child(even) {
+            flex-direction: row-reverse;
+            background-color: #fafbfc;
+        }
+        
+        .philosophy-img {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .philosophy-img img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        
+        .philosophy-text {
+            flex: 1.5;
+        }
+        
+        .philosophy-text h3 {
+            font-size: 1.8rem;
+            color: var(--brand-navy);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--brand-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
 
-        /* Course Item */
-        .course-item { background: white; border-radius: var(--radius-md); overflow: hidden; display: flex; box-shadow: var(--shadow-md); }
-        .course-img { width: 40%; background: linear-gradient(135deg, var(--brand-navy), #243B55); display: flex; align-items: center; justify-content: center; color: white; flex-direction: column; padding: 20px; text-align: center; }
-        .course-info { padding: 40px; flex: 1; }
-        .btn-course-detail { margin-top: 24px; color: var(--brand-navy); border: 2px solid var(--brand-navy); padding: 8px 24px; border-radius: 50px; font-weight: 600; background: transparent; cursor: pointer; }
+        /* --- Contact Page Styles --- */
+        .contact-content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--brand-navy);
+        }
 
-        /* About */
-        .about-container { display: flex; align-items: center; gap: 80px; }
-        .about-img, .about-text { flex: 1; }
-        .highlight-text { background-color: #FFFBEB; border-left: 4px solid var(--brand-gold); padding: 20px; margin: 30px 0; font-family: "Noto Serif TC", serif; font-style: italic; }
+        .contact-logo {
+            width: 250px;
+            height: auto;
+            margin-bottom: 30px;
+        }
 
-        /* Philosophy */
-        .philosophy-section { display: flex; align-items: center; padding: 60px; gap: 60px; border-bottom: 1px solid #f0f0f0; }
-        .philosophy-section:nth-child(even) { flex-direction: row-reverse; background-color: #FAFAFA; }
-        .philosophy-text h3 { font-size: 2rem; margin-bottom: 24px; border-bottom: 3px solid var(--brand-gold); display: inline-block; }
+        .contact-info-item {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
 
-        /* Contact */
-        .contact-card { background: white; padding: 60px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border-top: 6px solid var(--brand-navy); text-align: center; }
-        .contact-logo { width: 250px; margin: 0 auto 40px; }
-        .contact-info-item { margin-bottom: 24px; font-size: 1.2rem; display: flex; justify-content: center; gap: 16px; align-items: center; }
+        .contact-info-item i {
+            color: var(--brand-gold);
+            font-size: 1.5rem;
+            width: 30px;
+        }
 
-        /* CTA */
-        .btn-white { background-color: var(--brand-gold); color: var(--brand-navy); padding: 14px 40px; border-radius: 50px; font-weight: 700; display: inline-block; }
+        .contact-label {
+            font-weight: bold;
+            color: var(--brand-navy);
+            margin-right: 5px;
+        }
 
-        /* Footer */
-        footer { background-color: #0A192F; color: #94A3B8; padding: 80px 24px 40px; }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; text-align: left; }
-        .social-links { display: flex; gap: 16px; margin-top: 20px; }
-        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; color: white; }
-        .copyright { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        /* --- CTA --- */
+        .cta-section {
+            background-color: var(--brand-navy);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            margin-top: auto; /* 確保 Footer 在最底 */
+        }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; }
+        .cta-section p { max-width: 600px; margin: 0 auto 40px; opacity: 0.9; }
+        .btn-white { background-color: var(--brand-gold); color: var(--brand-navy); padding: 12px 35px; border-radius: 4px; font-weight: bold; font-size: 1.1rem; }
+        .btn-white:hover { background-color: #D4B775; color: white; }
 
-        /* ========================================= */
-        /* ★★★ 手機版專屬優化 (Mobile Logic) ★★★ */
-        /* ========================================= */
+        /* --- Footer --- */
+        footer { background-color: #111e3b; color: #aaa; padding: 60px 20px; text-align: center; }
+        .footer-logo-text { color: white; font-family: "Songti TC", serif; font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; }
+        .social-links { margin: 20px 0; }
+        .social-links a { color: white; margin: 0 10px; font-size: 1.5rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--brand-gold); }
+
+        /* --- RWD 手機版設定 --- */
         @media (max-width: 768px) {
-            /* 1. 全局字體與間距調整 */
-            body { line-height: 1.6; } /* 手機行距稍微收一點 */
-            h1 { font-size: 2rem !important; margin-bottom: 16px !important; }
-            h2 { font-size: 1.75rem !important; margin-bottom: 16px !important; }
-            h3 { font-size: 1.4rem !important; }
-            p { font-size: 1rem !important; color: #444; } /* 內文統一大小，顏色加深增加對比 */
+            .nav-container { height: 70px; }
             
-            /* 2. 區塊間距大幅縮小 */
-            .hero, .ai-section, .features, .about-section, .courses-section, .cta-section {
-                padding: 60px 20px; /* 上下間距從 100px 減為 60px */
-            }
-            .section-header { margin-bottom: 30px; } /* 標題與內容距離拉近 */
+            /* 顯示漢堡按鈕 */
+            .hamburger { display: block; }
 
-            /* 3. 導航列 */
-            .nav-container { padding: 0 20px; height: 70px; }
-            .logo-img { height: 45px; } /* 手機版 Logo 縮小，避免太搶眼 */
-            .hamburger { display: block; font-size: 1.4rem; padding: 10px; }
+            /* 手機版選單樣式 (預設隱藏) */
             .nav-menu {
-                display: none; position: absolute; top: 70px; left: 0; width: 100%;
-                background: white; flex-direction: column; padding: 10px 0;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top: 1px solid #eee;
+                display: none; /* JS 控制顯示 */
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                border-top: 1px solid #eee;
             }
-            .nav-menu.show { display: flex; }
-            .nav-menu a { width: 100%; text-align: center; padding: 15px; border-bottom: 1px solid #f9f9f9; font-size: 1rem; }
-            .nav-menu .btn-primary { margin: 15px auto; width: 90%; text-align: center; }
 
-            /* 4. Hero 區域 (圖上文下，更符合手機閱讀) */
-            .hero-content { flex-direction: column-reverse; gap: 30px; }
-            .hero-text { text-align: center; }
-            .hero-buttons { flex-direction: column; width: 100%; }
-            .hero-buttons a { width: 100%; text-align: center; } /* 按鈕滿版 */
-            .hero-visual img { margin-top: 0; width: 100%; max-height: 250px; object-fit: cover; }
+            .nav-menu.show { display: flex; } /* 顯示選單 */
 
-            /* 5. AI 工具 (卡片簡化) */
-            .ai-grid { grid-template-columns: 1fr; gap: 30px; }
-            .ai-card { padding: 24px; } /* 卡片內距縮小 */
-            .ai-card h3 { justify-content: flex-start; } /* 手機版標題靠左 */
-            .ai-result { margin-top: 16px; padding: 16px; font-size: 0.95rem; }
+            .nav-menu a {
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                border-bottom: 1px solid #f5f5f5;
+            }
 
-            /* 6. 特色卡片 */
-            .cards-grid { gap: 20px; }
-            .card { padding: 30px 20px; text-align: left; /* 手機版特色改為靠左，比較整齊 */ display: flex; flex-direction: row; align-items: flex-start; gap: 15px; }
-            .card-icon { margin: 0; width: 50px; height: 50px; font-size: 1.2rem; flex-shrink: 0; } /* Icon 縮小並放在左邊 */
-            .card > div { flex: 1; } /* 包果文字的容器 */
-            /* 因為原本 HTML 結構沒包 div，這裡用 grid 或是 flex 調整會比較複雜，
-               為了保持 HTML 不變，我們維持置中但縮小 padding 比較安全 */
-            .card { flex-direction: column; text-align: center; align-items: center; }
-            .card-icon { width: 60px; height: 60px; margin-bottom: 15px; }
-
-            /* 7. 關於我們 */
-            .about-container { flex-direction: column; gap: 30px; }
-            .about-text { text-align: left; } /* 手機版內文靠左 */
-            .highlight-text { margin: 20px 0; padding: 15px; font-size: 1rem; border-left: 3px solid var(--brand-gold); }
-
-            /* 8. 課程 */
+            .hero h1 { font-size: 2.2rem; }
+            .about-container { flex-direction: column; }
             .course-item { flex-direction: column; }
-            .course-img { width: 100%; height: 180px; padding: 15px; }
-            .course-img i { font-size: 3rem; }
-            .course-info { padding: 24px; }
-            .course-features { flex-direction: column; gap: 10px; } /* 特色垂直排列 */
-            .btn-course-detail { width: 100%; text-align: center; margin-top: 20px; }
-
-            /* 9. 品牌理念 (垂直流) */
-            .page-content-wrapper { margin: 40px auto; padding: 0 20px; }
-            .philosophy-section, .philosophy-section:nth-child(even) {
-                flex-direction: column; padding: 0; gap: 20px; border-bottom: none; margin-bottom: 40px; background: transparent;
-            }
-            .philosophy-img img { width: 100%; max-height: none; }
-            .philosophy-text { text-align: left; }
-
-            /* 10. 聯絡我們 */
+            .course-img { width: 100%; height: 200px; }
+            .hero-buttons { flex-direction: column; }
+            .ai-grid { grid-template-columns: 1fr; }
             .contact-card { padding: 30px 20px; }
-            .contact-logo { width: 180px; margin-bottom: 30px; }
-            .contact-info-item { flex-direction: column; gap: 8px; font-size: 1rem; align-items: center; text-align: center; }
+            .contact-info-item { flex-direction: column; gap: 5px; }
             
-            /* 11. Footer */
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-            .footer-col { text-align: center; } /* Footer 內容置中 */
-            .social-links { justify-content: center; }
-            footer { padding: 60px 20px 30px; }
+            .philosophy-section, .philosophy-section:nth-child(even) {
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 30px;
+            }
         }
     </style>
 </head>
@@ -265,7 +471,7 @@
                 >
             </a>
 
-            <!-- 漢堡選單按鈕 -->
+            <!-- 漢堡選單按鈕 (手機版出現) -->
             <div class="hamburger" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
@@ -275,7 +481,7 @@
                 <a onclick="showPage('home')" id="link-home" class="active">首頁</a>
                 <a onclick="showPage('philosophy')" id="link-philosophy">品牌理念</a>
                 <a onclick="showPage('curriculum')" id="link-curriculum">課程內容</a>
-                <a onclick="showPage('home', 'ai-playground')" id="link-ai" style="color: var(--ai-purple); font-weight:600;">✨ AI 財商實驗室</a>
+                <a onclick="showPage('home', 'ai-playground')" id="link-ai" style="color: var(--ai-purple); font-weight:bold;">✨ AI 財商實驗室</a>
                 <a onclick="showPage('contact')" id="link-contact">聯絡我們</a>
                 <a href="https://lin.ee/nhTYwb3" target="_blank" class="btn-primary">加入 Line@</a>
             </nav>
@@ -286,20 +492,17 @@
     
     <!-- PAGE 1: 首頁 (Home) -->
     <main id="page-home" class="page-view active">
-        <!-- Hero Section -->
+        <!-- 主視覺 Hero -->
         <section class="hero">
+            <div class="bg-circle circle-1"></div>
+            <div class="bg-circle circle-2"></div>
             <div class="hero-content">
-                <div class="hero-text reveal">
-                    <span class="badge">為孩子打造的財商啟蒙課程</span>
-                    <h1>種下財富智慧的新芽<br><span>兒童財商 x 猶太智慧</span></h1>
-                    <p>全台首創「國台雙語」可選的兒童財務教育課程。結合專業會計思維與生活實作，從小建立正確金錢觀，培養未來的理財小達人！</p>
-                    <div class="hero-buttons">
-                        <a onclick="showPage('curriculum')" class="btn-primary">查看課程內容</a>
-                        <a onclick="showPage('home', 'ai-playground')" class="btn-outline">✨ 體驗 AI 家教</a>
-                    </div>
-                </div>
-                <div class="hero-visual reveal">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="快樂學習的孩子">
+                <span class="badge">新穎教育-為孩子打造的財商啟蒙課程</span>
+                <h1>種下財富智慧的新芽<br><span>兒童財商 x 猶太智慧</span></h1>
+                <p>全台首創「國台雙語」可選的兒童財務教育課程。<br>從小建立正確金錢觀，培養小小大富翁！</p>
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn-primary">查看課程內容</a>
+                    <a href="#ai-playground" class="btn-outline">✨ 體驗 AI 家教</a>
                 </div>
             </div>
         </section>
@@ -307,16 +510,18 @@
         <!-- AI Features Section -->
         <section id="ai-playground" class="ai-section">
             <div class="ai-container">
-                <div class="section-header reveal">
+                <div class="ai-header">
                     <h2>AI 財商實驗室 <span>Gemini Powered</span></h2>
-                    <p>運用 Google 最新 AI 技術，讓理財學習變得聰明又好玩！</p>
+                    <p>運用 Google 最新 Gemini AI 技術，讓理財學習變得聰明又好玩！</p>
                 </div>
                 
                 <div class="ai-grid">
                     <!-- Feature 1 -->
-                    <div class="ai-card reveal">
+                    <div class="ai-card">
                         <h3><i class="fas fa-search-dollar"></i> 想要 vs 需要 判斷器</h3>
-                        <p>想買東西但不知道該不該買？輸入你想買的物品，讓 AI 錢包小管家幫你分析這是「必要的支出」還是「快樂的消費」。</p>
+                        <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
+                            想買東西但不知道該不該買？輸入你想買的物品，讓 AI 錢包小管家幫你分析這是「必要的支出」還是「快樂的消費」。
+                        </p>
                         <div class="ai-result" id="analysis-result">AI 錢包小管家準備好了，請在下方輸入你想買的東西...</div>
                         <div class="ai-input-group">
                             <input type="text" id="item-input" class="ai-input" placeholder="例如：最新款遊戲機、學校午餐...">
@@ -328,13 +533,13 @@
                     </div>
 
                     <!-- Feature 2 -->
-                    <div class="ai-card reveal">
+                    <div class="ai-card">
                         <h3><i class="fas fa-lightbulb"></i> 猶太智慧扭蛋機</h3>
-                        <p>理財路上迷惘了嗎？轉動扭蛋，獲得一句來自《塔木德》或猶太文化的古老智慧建議。</p>
+                        <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
+                            理財路上迷惘了嗎？轉動扭蛋，獲得一句來自《塔木德》或猶太文化的古老智慧建議。
+                        </p>
                         <div class="ai-result" id="wisdom-result" style="border-left-color: var(--brand-gold); min-height: 150px;">點擊按鈕，獲取今日的財富智慧金句...</div>
                         <div class="ai-input-group">
-                            <!-- 隱形的佔位框 -->
-                            <div class="ai-input" style="visibility: hidden; margin-bottom: 0;"></div>
                             <button class="btn-ai" onclick="getJewishWisdom()" style="background: linear-gradient(45deg, var(--brand-gold), #FFB74D);">
                                 <span class="btn-text">✨ 轉動扭蛋</span>
                                 <div class="loading-spinner"></div>
@@ -345,64 +550,68 @@
             </div>
         </section>
 
-        <!-- Features -->
+        <!-- 核心特色 Features -->
         <section id="features" class="features">
-            <div class="section-header reveal">
+            <div class="section-header">
                 <h2>為什麼選擇新穎？</h2>
                 <p>我們不教孩子投機，我們教孩子看見金錢背後的價值運作。</p>
             </div>
             <div class="cards-grid">
-                <div class="card accounting reveal">
+                <div class="card accounting">
                     <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
                     <h3>會計專業基底</h3>
                     <p>由台大會計背景團隊設計。跳脫單純的收支記帳，帶領孩子理解「資產」與「負債」的真實意義，建立系統性思考。</p>
                 </div>
-                <div class="card jewish reveal">
+                <div class="card jewish">
                     <div class="card-icon"><i class="fas fa-star-of-david"></i></div>
                     <h3>猶太理財智慧</h3>
                     <p>汲取《塔木德》智慧。教導孩子如何在賺錢、存錢與用錢之間取得平衡，培養對金錢負責任的態度。</p>
                 </div>
-                <div class="card local reveal">
+                <div class="card local">
                     <div class="card-icon"><i class="fas fa-comments"></i></div>
                     <h3>台語文化扎根</h3>
-                    <p>用母語學習生活財商，走進市場、走進生活，讓語言成為文化的載體，連結在地情感。</p>
+                    <p>用母語學習生活財商，走進市場、走進生活，讓語言成為文化的載體。</p>
                 </div>
             </div>
         </section>
 
-        <!-- About -->
+        <!-- 關於創辦人 About -->
         <section id="about" class="about-section">
             <div class="about-container">
-                <div class="about-img reveal">
+                <div class="about-img">
                     <img 
                         src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" 
                         alt="新穎教育創辦人" 
                         referrerpolicy="no-referrer"
+                        style="border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; height: auto;"
                         onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Founder+Photo';"
                     >
                 </div>
-                <div class="about-text reveal">
+                <div class="about-text">
                     <h2>放棄傳統鐵飯碗，全心投入孩童啟蒙教育</h2>
                     <div class="highlight-text">
                         「當我發現台灣的孩子埋頭於課業，卻對花錢、消費缺乏觀念，我知道我該挺身而出。我希望用專業，為孩子種下第一顆財富智慧的種子。」
                     </div>
                     <p>我是新穎教育的創辦人黃紹恩。作為台灣大學會計學系的準畢業生，並曾任兒童服務性社團社長，我的夢想並非進入四大事務所成為人人稱羨的會計師，我希望透過自身的力量，啟發台灣孩子的無限可能。</p>
-                    <a onclick="showPage('philosophy')" style="color: var(--brand-navy); font-weight:bold; border-bottom: 2px solid var(--brand-gold); cursor: pointer; display: inline-block; margin-top: 10px;">閱讀更多品牌故事 <i class="fas fa-arrow-right"></i></a>
+                    <p>新穎 (Sin-inn) 在台語代表著「新芽」，而每一位孩子，未來都將成長茁壯為一棵棵參天大樹。在灌溉的第一步，我希望結合我的專業，以簡易的金錢、消費、投資等觀念，啟蒙孩子的金錢觀，打造國家未來的大富翁。</p>
+                    <a onclick="showPage('philosophy')" style="color: var(--brand-navy); font-weight:bold; border-bottom: 2px solid var(--brand-gold); cursor: pointer;">閱讀更多品牌故事 <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- Courses -->
+        <!-- 課程區塊 Courses -->
         <section id="courses" class="courses-section">
-            <div class="section-header reveal">
+            <div class="section-header">
                 <h2>首發課程</h2>
                 <p>針對 11-13 歲認知發展設計，做中學、玩中學。</p>
             </div>
             <div class="course-wrapper">
-                <div class="course-item reveal">
+                <div class="course-item">
                     <div class="course-img c1">
-                        <i class="fas fa-calculator"></i>
-                        <div>小小會計師</div>
+                        <div>
+                            <i class="fas fa-calculator" style="font-size:3rem;"></i>
+                            <br>小小會計師
+                        </div>
                     </div>
                     <div class="course-info">
                         <span class="course-tag">入門首選</span>
@@ -419,9 +628,9 @@
             </div>
         </section>
         
-        <!-- CTA -->
+        <!-- CTA 區塊 (僅在首頁顯示) -->
         <section class="cta-section">
-            <div class="container reveal">
+            <div class="container">
                 <h2>準備好開啟孩子的財富之旅了嗎？</h2>
                 <p>名額有限，歡迎家長加入官方 Line@ 索取最新課表與試聽資訊。</p>
                 <a href="https://lin.ee/nhTYwb3" target="_blank" class="btn-white">加入 Line@ 諮詢</a>
@@ -437,7 +646,8 @@
                 <p>啟發每一個孩子的財富潛能，種下希望的種子。</p>
             </div>
 
-            <div class="philosophy-card reveal">
+            <div class="philosophy-card">
+                <!-- 第一段：品牌理念 -->
                 <div class="philosophy-section">
                     <div class="philosophy-img">
                         <img src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" alt="新穎教育 Logo" referrerpolicy="no-referrer">
@@ -450,6 +660,7 @@
                     </div>
                 </div>
 
+                <!-- 第二段：創辦人介紹 -->
                 <div class="philosophy-section">
                     <div class="philosophy-img">
                         <img src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" alt="創辦人 黃紹恩" referrerpolicy="no-referrer" style="border-radius: 8px;">
@@ -463,6 +674,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- CTA (共用) -->
         <section class="cta-section">
             <div class="container">
                 <h2>認同我們的理念嗎？</h2>
@@ -480,12 +693,15 @@
                 <p>我們精心設計的財商課程，適合不同年齡層的孩子。</p>
             </div>
             
-            <div style="text-align: center; padding: 100px 20px; background: white; border-radius: 16px; border: 2px dashed #ddd; color: #888;" class="reveal">
+            <!-- 預留的空白區塊，未來填入詳細內容 -->
+            <div style="text-align: center; padding: 100px 20px; background: white; border-radius: 16px; border: 2px dashed #ddd; color: #888;">
                 <i class="fas fa-hammer" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
                 <h3>課程詳細內容即將上線</h3>
                 <p>我們正在為孩子準備最豐富有趣的課程教材，敬請期待！</p>
             </div>
         </div>
+
+        <!-- CTA (共用) -->
         <section class="cta-section">
             <div class="container">
                 <h2>想第一時間獲得開課通知？</h2>
@@ -503,12 +719,14 @@
                 <p>有任何課程疑問或商業合作需求，歡迎與我們聯繫。</p>
             </div>
             
-            <div class="contact-card reveal">
+            <div class="contact-card">
+                <!-- 聯絡頁面 Logo -->
                 <img 
                     src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" 
                     alt="新穎教育 Logo" 
                     class="contact-logo"
                     referrerpolicy="no-referrer"
+                    style="margin: 0 auto 30px auto;"
                 >
                 
                 <div class="contact-info-item">
@@ -540,90 +758,72 @@
     </main>
 
     <!-- Footer (共用) -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <span class="footer-logo-text">新穎教育 S.I. Education</span>
-                <p class="footer-desc">專注於 10-12 歲兒童財商教育。結合會計專業、猶太智慧與在地文化，為孩子種下第一顆財富種子。</p>
-            </div>
-            <div class="footer-col">
-                <h4>快速連結</h4>
-                <ul class="footer-links">
-                    <li><a onclick="showPage('home')">首頁</a></li>
-                    <li><a onclick="showPage('curriculum')">課程內容</a></li>
-                    <li><a onclick="showPage('philosophy')">品牌理念</a></li>
-                    <li><a onclick="showPage('contact')">聯絡我們</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>關注我們</h4>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/1CL6MFXfQq/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/s.i.education?igsh=MTlwdWw5eDBxbG9nYw==" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://lin.ee/nhTYwb3" target="_blank"><i class="fab fa-line"></i></a>
-                </div>
-            </div>
+    <footer id="contact">
+        <div class="footer-logo-text">新穎教育 S.I. Education</div>
+        
+        <p>兒童財商啟蒙教育第一品牌</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/1CL6MFXfQq/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/s.i.education?igsh=MTlwdWw5eDBxbG9nYw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://lin.ee/nhTYwb3" target="_blank"><i class="fab fa-line"></i></a>
         </div>
-        <p class="copyright">&copy; 2026 S.I. Education. All Rights Reserved.</p>
+        <p>&copy; 2026 S.I. Education. All Rights Reserved.</p>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Gemini API Script -->
     <script>
         const SITE_OWNER_API_KEY = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
         const effectiveKey = (typeof apiKey !== 'undefined' && apiKey) ? apiKey : SITE_OWNER_API_KEY;
 
-        // Scroll Reveal Animation
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        // Trigger once on load
-        reveal();
-
+        // --- 頁面切換邏輯 ---
         function showPage(pageId, sectionId = null) {
+            // 1. 切換頁面顯示
             document.querySelectorAll('.page-view').forEach(page => {
                 page.classList.remove('active');
             });
             document.getElementById('page-' + pageId).classList.add('active');
-            
+
+            // 2. 更新導航按鈕狀態
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.classList.remove('active');
             });
             
-            if (pageId === 'home' && !sectionId) document.getElementById('link-home').classList.add('active');
-            else if (pageId === 'philosophy') document.getElementById('link-philosophy').classList.add('active');
-            else if (pageId === 'curriculum') document.getElementById('link-curriculum').classList.add('active');
-            else if (pageId === 'contact') document.getElementById('link-contact').classList.add('active');
+            // 判斷要亮起哪個按鈕
+            if (pageId === 'home' && !sectionId) {
+                document.getElementById('link-home').classList.add('active');
+            } else if (pageId === 'philosophy') {
+                document.getElementById('link-philosophy').classList.add('active');
+            } else if (pageId === 'curriculum') {
+                document.getElementById('link-curriculum').classList.add('active');
+            } else if (pageId === 'contact') {
+                document.getElementById('link-contact').classList.add('active');
+            }
 
+            // 3. 如果有指定區塊 (例如 AI)，滑動過去
             if (sectionId) {
                 setTimeout(() => {
                     const section = document.getElementById(sectionId);
                     if (section) section.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             } else {
+                // 否則回到頂部
                 window.scrollTo(0, 0);
             }
-            
+
+            // 4. 手機版切換後自動收合選單
             const menu = document.getElementById('nav-menu');
-            if (menu.classList.contains('show')) toggleMenu();
-            
-            // Re-trigger animation check for new page
-            setTimeout(reveal, 100);
+            if (menu.classList.contains('show')) {
+                toggleMenu();
+            }
         }
 
+        // --- 手機版選單切換 ---
         function toggleMenu() {
             const menu = document.getElementById('nav-menu');
             menu.classList.toggle('show');
         }
 
+        // --- AI API Logic (不變) ---
         async function callGemini(prompt) {
             try {
                 if (!effectiveKey || effectiveKey.includes("API Key")) {
