@@ -808,121 +808,89 @@
 
     <!-- Gemini API Script -->
     <script>
-        const SITE_OWNER_API_KEY = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
-        let userApiKey = localStorage.getItem("gemini_api_key") || ""; 
+        // 固定金鑰與配置
+        const apiKey = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
         
         // --- 頁面切換邏輯 ---
         function showPage(pageId, sectionId = null) {
-            // 1. 切換頁面顯示
-            document.querySelectorAll('.page-view').forEach(page => {
-                page.classList.remove('active');
-            });
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
 
-            // 2. 更新導航按鈕狀態
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // 判斷要亮起哪個按鈕
-            if (pageId === 'home' && !sectionId) {
-                document.getElementById('link-home').classList.add('active');
-            } else if (pageId === 'philosophy') {
-                document.getElementById('link-philosophy').classList.add('active');
-            } else if (pageId === 'curriculum') {
-                document.getElementById('link-curriculum').classList.add('active');
-            } else if (pageId === 'contact') {
-                document.getElementById('link-contact').classList.add('active');
-            }
+            document.querySelectorAll('.nav-menu a').forEach(link => link.classList.remove('active'));
+            if (pageId === 'home' && !sectionId) document.getElementById('link-home').classList.add('active');
+            else if (pageId === 'philosophy') document.getElementById('link-philosophy').classList.add('active');
+            else if (pageId === 'curriculum') document.getElementById('link-curriculum').classList.add('active');
+            else if (pageId === 'contact') document.getElementById('link-contact').classList.add('active');
 
-            // 3. 如果有指定區塊 (例如 AI)，滑動過去
             if (sectionId) {
                 setTimeout(() => {
                     const section = document.getElementById(sectionId);
                     if (section) section.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
             } else {
-                // 否則回到頂部
                 window.scrollTo(0, 0);
             }
 
-            // 4. 手機版切換後自動收合選單
             const menu = document.getElementById('nav-menu');
-            if (menu.classList.contains('show')) {
-                toggleMenu();
-            }
-
-            // 5. 重新觸發首頁動畫 (如果是切回首頁)
-            if (pageId === 'home') {
-                initReveal(); 
-            }
+            if (menu.classList.contains('show')) toggleMenu();
+            if (pageId === 'home') initReveal(); 
         }
 
-        // --- 手機版選單切換 ---
         function toggleMenu() {
-            const menu = document.getElementById('nav-menu');
-            menu.classList.toggle('show');
+            document.getElementById('nav-menu').classList.toggle('show');
         }
 
-        // --- Scroll Reveal Animation Logic ---
         const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, {
-            threshold: 0.1 // 元素出現 10% 時觸發
-        });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
 
         function initReveal() {
-            const elements = document.querySelectorAll('.reveal');
-            elements.forEach(el => revealObserver.observe(el));
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
         }
 
-        // 頁面載入時初始化動畫偵測
         document.addEventListener('DOMContentLoaded', initReveal);
 
-
-        // --- AI API Logic (修復版) ---
-        async function callGemini(prompt) {
+        // --- Gemini API Logic (Standard & Fixed) ---
+        async function callGemini(userQuery) {
+            const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。";
             
-            // 優先使用預覽環境注入的 key，其次是網站擁有者的 key，最後是使用者輸入的 key
-            const effectiveKey = (typeof apiKey !== 'undefined' && apiKey) ? apiKey : (SITE_OWNER_API_KEY || userApiKey);
-
-            if (!effectiveKey) {
-                const inputKey = prompt("請輸入您的 Google Gemini API Key 以啟用 AI 功能：\n(您可以到 aistudio.google.com 免費申請)");
-                if (inputKey) {
-                    userApiKey = inputKey;
-                    localStorage.setItem("gemini_api_key", inputKey);
-                    return callGemini(prompt); // 重新呼叫
-                } else {
-                    return "需要 API Key 才能呼叫 AI 小管家喔！";
+            // 指數退避重試邏輯
+            const fetchWithRetry = async (url, options, retries = 5, backoff = 1000) => {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        if (retries > 0 && (response.status === 429 || response.status >= 500)) {
+                            await new Promise(resolve => setTimeout(resolve, backoff));
+                            return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                        }
+                        throw new Error("連線失敗");
+                    }
+                    return await response.json();
+                } catch (err) {
+                    if (retries > 0) {
+                        await new Promise(resolve => setTimeout(resolve, backoff));
+                        return fetchWithRetry(url, options, retries - 1, backoff * 2);
+                    }
+                    throw err;
                 }
-            }
+            };
 
             try {
-                // 自動判斷模型：如果是預覽環境(有注入apiKey)則用預覽模型，否則用通用模型(1.5-flash)
-                const modelName = (typeof apiKey !== 'undefined' && apiKey) ? "gemini-2.5-flash-preview-09-2025" : "gemini-1.5-flash";
-                
-                const apiURL = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${effectiveKey}`;
-                
-                const response = await fetch(apiURL, {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
+                };
+
+                const result = await fetchWithRetry(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    body: JSON.stringify(payload)
                 });
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error.message || response.statusText);
-                }
-                
-                const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
+                return result.candidates?.[0]?.content?.parts?.[0]?.text || "抱歉，AI 錢包小管家現在有點忙碌！";
             } catch (error) {
-                console.error("Gemini API Error:", error);
-                // 統一顯示簡單的錯誤訊息
+                console.error(error);
                 return "抱歉，AI 錢包小管家現在有點忙碌！";
             }
         }
@@ -931,47 +899,40 @@
             const input = document.getElementById('item-input').value.trim();
             const resultBox = document.getElementById('analysis-result');
             const btn = document.querySelector('button[onclick="analyzeWantVsNeed()"]');
-            const btnText = btn.querySelector('.btn-text');
-            const spinner = btn.querySelector('.loading-spinner');
-
+            
             if (!input) { resultBox.innerText = "請先輸入你想買的東西喔！"; return; }
 
-            btnText.style.display = 'none';
-            spinner.style.display = 'block';
+            btn.querySelector('.btn-text').style.display = 'none';
+            btn.querySelector('.loading-spinner').style.display = 'block';
             btn.disabled = true;
             resultBox.innerText = "正在分析這筆消費...";
 
-            // 如果 prompt 是原本的變數名，這裡會衝突，改用 apiPrompt
-            const apiPrompt = `你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。一位 10-12 歲的孩子想買：「${input}」。請用繁體中文回答：1. 判斷這通常是「想要」(Want) 還是「需要」(Need)。2. 請專注於分析「花這筆錢合不合理」，引導孩子思考這筆消費的價值。3. 給予一個溫暖的建議。`;
-            
-            const response = await callGemini(apiPrompt);
+            const query = `我想買：「${input}」。請幫我分析這是「想要」(Want) 還是「需要」(Need)，解釋原因並給我溫暖的建議。`;
+            const response = await callGemini(query);
             
             resultBox.innerText = response;
-            btnText.style.display = 'block';
-            spinner.style.display = 'none';
+            btn.querySelector('.btn-text').style.display = 'block';
+            btn.querySelector('.loading-spinner').style.display = 'none';
             btn.disabled = false;
         }
 
         async function getJewishWisdom() {
             const resultBox = document.getElementById('wisdom-result');
             const btn = document.querySelector('button[onclick="getJewishWisdom()"]');
-            const btnText = btn.querySelector('.btn-text');
-            const spinner = btn.querySelector('.loading-spinner');
-
-            btnText.style.display = 'none';
-            spinner.style.display = 'block';
+            
+            btn.querySelector('.btn-text').style.display = 'none';
+            btn.querySelector('.loading-spinner').style.display = 'block';
             btn.disabled = true;
             resultBox.innerText = "正在轉動智慧扭蛋...";
 
-            const apiPrompt = `請給我一句來自《塔木德》(Talmud) 或猶太文化的簡短理財智慧金句。對象是 10-12 歲的台灣小學生。請用繁體中文：1. 列出金句。2. 解釋意思。3. 關聯到現代存錢習慣。`;
-            const response = await callGemini(apiPrompt);
+            const query = "請給我一句來自《塔木德》(Talmud) 或猶太文化的簡短理財智慧金句，解釋意思並告訴我如何用在現代的存錢習慣。";
+            const response = await callGemini(query);
 
             resultBox.innerText = response;
-            btnText.style.display = 'block';
-            spinner.style.display = 'none';
+            btn.querySelector('.btn-text').style.display = 'block';
+            btn.querySelector('.loading-spinner').style.display = 'none';
             btn.disabled = false;
         }
     </script>
-
 </body>
 </html>
