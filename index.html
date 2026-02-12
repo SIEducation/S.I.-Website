@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新穎教育 S.I. Education | 啟發孩子的財富智慧</title>
     
+    <!-- 引入 Font Awesome 圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- 引入 Google Fonts (Noto Sans TC & Noto Serif TC) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
@@ -363,6 +365,13 @@
             padding-bottom: 5px;
         }
 
+        /* 調整品牌理念內文的行距與舒適度 */
+        .philosophy-text p {
+            line-height: 1.9;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
         /* --- Contact Page Styles --- */
         .contact-content {
             max-width: 800px;
@@ -457,7 +466,16 @@
                 border-bottom: 1px solid #f5f5f5;
             }
 
-            .hero h1 { font-size: 2.2rem; }
+            .hero h1 { font-size: 2rem; } /* 稍微縮小主標題字體 */
+            
+            /* 修正：強制副標題不換行，並調整字體大小 */
+            .hero h1 span { 
+                white-space: nowrap; 
+                font-size: 1.8rem; 
+                display: inline-block;
+                margin-top: 5px;
+            }
+
             .about-container { flex-direction: column; }
             .course-item { flex-direction: column; }
             .course-img { width: 100%; height: 200px; }
@@ -476,6 +494,7 @@
 </head>
 <body>
 
+    <!-- 導航列 -->
     <header>
         <div class="nav-container">
             <a onclick="showPage('home')" class="logo-container">
@@ -488,10 +507,12 @@
                 >
             </a>
 
+            <!-- 漢堡選單按鈕 (手機版出現) -->
             <div class="hamburger" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </div>
 
+            <!-- 選單連結 -->
             <nav class="nav-menu" id="nav-menu">
                 <a onclick="showPage('home')" id="link-home" class="active">首頁</a>
                 <a onclick="showPage('philosophy')" id="link-philosophy">品牌理念</a>
@@ -503,7 +524,11 @@
         </div>
     </header>
 
+    <!-- 頁面容器 -->
+    
+    <!-- PAGE 1: 首頁 (Home) -->
     <main id="page-home" class="page-view active">
+        <!-- 主視覺 Hero -->
         <section class="hero">
             <div class="bg-circle circle-1"></div>
             <div class="bg-circle circle-2"></div>
@@ -518,6 +543,7 @@
             </div>
         </section>
 
+        <!-- AI Features Section -->
         <section id="ai-playground" class="ai-section">
             <div class="ai-container">
                 <div class="ai-header reveal">
@@ -526,6 +552,7 @@
                 </div>
                 
                 <div class="ai-grid">
+                    <!-- Feature 1 -->
                     <div class="ai-card reveal">
                         <h3><i class="fas fa-search-dollar"></i> 想要 vs 需要 判斷器</h3>
                         <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
@@ -541,6 +568,7 @@
                         </div>
                     </div>
 
+                    <!-- Feature 2 -->
                     <div class="ai-card reveal">
                         <h3><i class="fas fa-lightbulb"></i> 猶太智慧扭蛋機</h3>
                         <p style="color:#666; font-size:0.9rem; margin-bottom:20px; text-align: left;">
@@ -558,6 +586,7 @@
             </div>
         </section>
 
+        <!-- 核心特色 Features -->
         <section id="features" class="features">
             <div class="section-header reveal">
                 <h2>為什麼選擇新穎？</h2>
@@ -582,6 +611,7 @@
             </div>
         </section>
 
+        <!-- 關於創辦人 About -->
         <section id="about" class="about-section">
             <div class="about-container">
                 <div class="about-img reveal">
@@ -605,6 +635,7 @@
             </div>
         </section>
 
+        <!-- 課程區塊 Courses -->
         <section id="courses" class="courses-section">
             <div class="section-header reveal">
                 <h2>首發課程</h2>
@@ -633,6 +664,7 @@
             </div>
         </section>
         
+        <!-- CTA 區塊 (僅在首頁顯示) -->
         <section class="cta-section">
             <div class="container reveal">
                 <h2>準備好開啟孩子的財富之旅了嗎？</h2>
@@ -642,6 +674,7 @@
         </section>
     </main>
 
+    <!-- PAGE 2: 品牌理念 (Philosophy) -->
     <main id="page-philosophy" class="page-view">
         <div class="page-content-wrapper">
             <div class="section-header">
@@ -650,32 +683,35 @@
             </div>
 
             <div class="philosophy-card">
+                <!-- 第一段：品牌理念 -->
                 <div class="philosophy-section">
                     <div class="philosophy-img">
                         <img src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" alt="新穎教育 Logo" referrerpolicy="no-referrer">
                     </div>
                     <div class="philosophy-text">
                         <h3>品牌理念</h3>
-                        <p>「新穎」二字，取自台語「新芽」的諧音。我們深信，每一個孩子都像是一顆剛萌發的種子，蘊含著無限的生命力與可能性。</p>
+                        <p>新穎（Sin-inn）在台語代表「新芽」。我們深信，每一個孩子都像是一顆剛萌發的種子，蘊含著無限的生命力與可能性。</p>
                         <p>在台灣的教育體制下，孩子們往往專注於學科知識，卻忽略了對「金錢」與「價值」的認識。新穎教育希望能填補這塊缺口，透過系統性的財商教育，結合猶太民族流傳千年的智慧，教導孩子正確的金錢觀、價值觀與責任感。</p>
                         <p>我們不只教怎麼賺錢，更教怎麼聰明花錢、如何規劃未來。讓孩子在成長的過程中，不僅擁有知識，更擁有面對真實世界的智慧與能力。</p>
                     </div>
                 </div>
 
+                <!-- 第二段：創辦人介紹 -->
                 <div class="philosophy-section">
                     <div class="philosophy-img">
                         <img src="https://lh3.googleusercontent.com/d/1_siIMKJd9_zhIrWY2SCWCd2K0YWjBXs6" alt="創辦人 黃紹恩" referrerpolicy="no-referrer" style="border-radius: 8px;">
                     </div>
                     <div class="philosophy-text">
                         <h3>創辦人：黃紹恩</h3>
-                        <p>我是新穎教育的創辦人黃紹恩。作為台灣大學會計學系的學生，我受過嚴謹的財務邏輯訓練，也看過許多企業因財務觀念不佳而陷入困境。</p>
-                        <p>在大學期間，我曾擔任兒童服務性社團的社長，深入接觸過許多孩子。我發現，孩子們對於金錢充滿好奇，卻缺乏引導。這讓我萌生了一個念頭：為什麼不把艱澀的會計知識，轉化成孩子聽得懂的語言呢？</p>
+                        <p>我是新穎教育的創辦人黃紹恩。作為台灣大學會計學系的學生，我受過嚴謹的財務邏輯訓練，也看過許多同學因財務觀念不佳而陷入困境。</p>
+                        <p>在大學期間，我曾擔任兒童服務性社團的社長，深入接觸過許多孩子。我發現，孩子們無時無刻不在進行消費行為，卻對金錢與消費缺乏觀念。而經濟日漸發展的台灣，投資、通膨等財務名詞也逐漸走入大眾視野。這讓我萌生了一個念頭：為什麼不把艱澀的財務知識，轉化成孩子聽得懂的語言呢？</p>
                         <p>於是，我決定放棄進入傳統會計師事務所的平穩道路，選擇了一條充滿挑戰卻更有意義的路——創辦新穎教育。我希望用我的專業，為台灣的孩子種下第一顆財富智慧的種子，讓他們在未來的人生旅途中，能夠自信地駕馭金錢，而不是被金錢所困。</p>
                     </div>
                 </div>
             </div>
         </div>
         
+        <!-- CTA (共用) -->
         <section class="cta-section">
             <div class="container">
                 <h2>認同我們的理念嗎？</h2>
@@ -685,6 +721,7 @@
         </section>
     </main>
 
+    <!-- PAGE 3: 課程內容 (Curriculum) -->
     <main id="page-curriculum" class="page-view">
         <div class="page-content-wrapper">
             <div class="section-header">
@@ -692,6 +729,7 @@
                 <p>我們精心設計的財商課程，適合不同年齡層的孩子。</p>
             </div>
             
+            <!-- 預留的空白區塊，未來填入詳細內容 -->
             <div style="text-align: center; padding: 100px 20px; background: white; border-radius: 16px; border: 2px dashed #ddd; color: #888;">
                 <i class="fas fa-hammer" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
                 <h3>課程詳細內容即將上線</h3>
@@ -699,6 +737,7 @@
             </div>
         </div>
 
+        <!-- CTA (共用) -->
         <section class="cta-section">
             <div class="container">
                 <h2>想第一時間獲得開課通知？</h2>
@@ -708,6 +747,7 @@
         </section>
     </main>
 
+    <!-- PAGE 4: 聯絡我們 (Contact) -->
     <main id="page-contact" class="page-view">
         <div class="contact-content">
             <div class="section-header">
@@ -716,6 +756,7 @@
             </div>
             
             <div class="contact-card">
+                <!-- 聯絡頁面 Logo -->
                 <img 
                     src="https://lh3.googleusercontent.com/d/1_7FANf_5rIdjiWX0629UR8kjw2lfJU6G" 
                     alt="新穎教育 Logo" 
@@ -752,6 +793,7 @@
         </div>
     </main>
 
+    <!-- Footer (共用) -->
     <footer id="contact">
         <div class="footer-logo-text">新穎教育 S.I. Education</div>
         
@@ -764,6 +806,7 @@
         <p>© 2026 S.I. Education. All Rights Reserved.</p>
     </footer>
 
+    <!-- Gemini API Script -->
     <script>
         const SITE_OWNER_API_KEY = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
         const effectiveKey = (typeof apiKey !== 'undefined' && apiKey) ? apiKey : SITE_OWNER_API_KEY;
