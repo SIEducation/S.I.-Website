@@ -2842,105 +2842,46 @@
 
 
 
-        async function callGemini(userQuery) {
-
-
-
-            const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。";
-
-
-
-            // 修正為 2.5-flash 模型與正確網址
-
-
-
-            const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-
-
-
-
-
-
+async function callGemini(userQuery) {
+            const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。不要使用太艱深的成語。";
+            
+            // 修改 1: 使用 v1beta 才能支援 systemInstruction
+            // 修改 2: 模型名稱修正為 gemini-1.5-flash
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
             const payload = {
-
-
-
-                contents: [{ parts: [{ text: userQuery }] }],
-
-
-
-                systemInstruction: { parts: [{ text: systemPrompt }] }
-
-
-
+                // v1beta 支援將 systemInstruction 放在這裡
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                contents: [
+                    { 
+                        role: "user", // 建議加上 role
+                        parts: [{ text: userQuery }] 
+                    }
+                ]
             };
 
-
-
-
-
-
-
             try {
-
-
-
                 const response = await fetch(url, {
-
-
-
                     method: 'POST',
-
-
-
                     headers: { 'Content-Type': 'application/json' },
-
-
-
                     body: JSON.stringify(payload)
-
-
-
                 });
 
-
-
-
-
-
-
-                if (!response.ok) throw new Error("API Request Failed");
-
-
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("API Error Details:", errorData);
+                    throw new Error(`API Error: ${response.status}`);
+                }
 
                 const data = await response.json();
-
-
-
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在休息中，請稍後再試！";
-
-
-
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在思考中，請再試一次！";
             } catch (error) {
-
-
-
-                console.error(error);
-
-
-
-                return "小管家正在休息中，請稍後再試！";
-
-
-
+                console.error("Fetch error:", error);
+                return "小管家現在有點累（連線錯誤），請檢查網路或 API Key 設定喔！";
             }
-
-
-
         }
-
-
 
 
 
