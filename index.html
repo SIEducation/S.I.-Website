@@ -2871,14 +2871,14 @@ async function callGemini(userQuery) {
                     // 印出詳細錯誤以便除錯
                     const errorData = await response.json();
                     console.error("Gemini API Error:", errorData);
-                    return `小管家現在有點累，請稍位再試喔！`;
+                    return `小管家現在有點累，請稍後再試喔！`;
                 }
 
                 const data = await response.json();
                 return data.candidates?.[0]?.content?.parts?.[0]?.text || "小管家正在思考中，請再試一次！";
             } catch (error) {
                 console.error("Fetch error:", error);
-                return "小管家現在有點累，請稍位再試喔！";
+                return "小管家現在有點累，請稍後再試喔！";
             }
         }
 
@@ -2917,7 +2917,7 @@ async function callGemini(userQuery) {
 
 
 
-            const response = await callGemini(`我想買：「${input}」。請分析這是「想要」還是「需要」，並給 10 歲小孩溫暖建議。`);
+            const response = await callGemini(`我想買：「${input}」。請分析這是「想要」還是「需要」，並給予孩子溫暖建議。`);
 
 
 
