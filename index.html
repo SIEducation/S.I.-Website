@@ -808,7 +808,7 @@
 
     <!-- Gemini API Script -->
     <script>
-        // 舊的無效 key 已移除，請確保輸入您自己的 API Key
+        const SITE_OWNER_API_KEY = "AIzaSyClsYoomusidfW1bwnqsZ8t2Enm9WFGxM0"; 
         let userApiKey = localStorage.getItem("gemini_api_key") || ""; 
         
         // --- 頁面切換邏輯 ---
@@ -887,8 +887,8 @@
         // --- AI API Logic (修復版) ---
         async function callGemini(prompt) {
             
-            // 優先使用預覽環境注入的 key，如果沒有則使用使用者輸入的 key
-            const effectiveKey = (typeof apiKey !== 'undefined' && apiKey) ? apiKey : userApiKey;
+            // 優先使用預覽環境注入的 key，其次是網站擁有者的 key，最後是使用者輸入的 key
+            const effectiveKey = (typeof apiKey !== 'undefined' && apiKey) ? apiKey : (SITE_OWNER_API_KEY || userApiKey);
 
             if (!effectiveKey) {
                 const inputKey = prompt("請輸入您的 Google Gemini API Key 以啟用 AI 功能：\n(您可以到 aistudio.google.com 免費申請)");
