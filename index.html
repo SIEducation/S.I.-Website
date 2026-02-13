@@ -764,7 +764,7 @@
     </footer>
 
     <script>
-        const apiKey = "AIzaSyDJG09wGtjRHZ2jJyqUfXd1Qw1Dkgl4V8I"; 
+        // --- 修正後的 Gemini API 邏輯 (透過 Cloudflare Worker) ---
         
         function showPage(pageId, sectionId = null) {
             document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
@@ -795,12 +795,13 @@
         function initReveal() { document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el)); }
         document.addEventListener('DOMContentLoaded', initReveal);
 
-        // --- 修正後的 Gemini API 邏輯 ---
         async function callGemini(userQuery) {
             // 系統指令：設定 AI 的角色與語氣
             const systemPrompt = "你是一位親切、幽默的兒童財商教育專家（角色名稱：新穎 AI 錢包小管家）。請用繁體中文回答，口吻要適合 10-12 歲的孩子。不要使用太艱深的成語。";
             
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            // 【重要】請將此網址替換為您的 Cloudflare Worker 網址
+            // 例如: const workerUrl = "https://si-education-api.your-name.workers.dev";
+            const workerUrl = "https://si-education-api.si-kid-education.workers.dev";
 
             const payload = {
                 systemInstruction: {
@@ -815,7 +816,7 @@
             };
 
             try {
-                const response = await fetch(url, {
+                const response = await fetch(workerUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -824,7 +825,7 @@
                 if (!response.ok) {
                     // 印出詳細錯誤以便除錯
                     const errorData = await response.json();
-                    console.error("Gemini API Error:", errorData);
+                    console.error("Worker Error:", errorData);
                     return `小管家現在有點累，請稍後再試喔！`;
                 }
 
